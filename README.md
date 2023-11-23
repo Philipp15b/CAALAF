@@ -14,7 +14,7 @@ Download and unzip the latest [release](http://caal.cs.aau.dk/caal-local.zip) fo
 
 ## For developers
 
-####Setup
+#### Setup
 
 All you need is to have installed is [Node.js](http://nodejs.org/), npm, and Python (for building ace).
 Clone this repository and run the following commands in the root directory of the repository:
@@ -31,9 +31,9 @@ npm install
 To build CAAL, run the following command in the root directory.
 
 ```bash
-npm run build
+npm run build-all
 ```
-This will run the ``` build.sh ``` script, which will compile all of the Typescript files, and compile any potential changes in the Ace submodule.
+This will run the ``` build.js ``` script, which will compile all of the Typescript files, and compile any potential changes in the Ace submodule.
 
 
 To compile the project, run all unit tests, and zip all necessary files to run CAAL:
