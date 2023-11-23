@@ -184,13 +184,15 @@ module CCS {
     export class Action {
         private label : string;
         private complement : boolean;
+        private annotation?: string;
 
-        constructor(label : string, isComplement : boolean) {
+        constructor(label : string, isComplement : boolean, annotation?: string) {
             if (label === "tau" && isComplement) {
                 throw newError("TauNoComplement", "Tau has no complement.");
             }
             this.label = label;
             this.complement = isComplement;
+            this.annotation = annotation;
         }
 
         getLabel() : string {
@@ -207,19 +209,21 @@ module CCS {
         }
 
         toString(formatComplement = false) {
+            var res = this.label == "tau" ? "τ" : this.label;
             if (this.complement) {
                 if (formatComplement) {
-                    return "<span class=\"overline\">'" + this.label + "</span>"
+                    res =  "<span class=\"overline\">'" + res + "</span>"
                 } else {
-                    return "'" + this.label;
+                    res = "'" + res
                 }
             } else {
-                return this.label;
+                res = res
             }
+            return res + (this.annotation ? ` (${this.annotation})` : "")
         }
 
         clone() {
-            return new Action(this.label, this.complement);
+            return new Action(this.label, this.complement, this.annotation);
         }
     }
 
@@ -775,7 +779,7 @@ module CCS {
                                     var targetSubprocesses = process.subProcesses.slice(0);
                                     targetSubprocesses[i] = leftTransition.targetProcess;
                                     targetSubprocesses[j] = rightTransition.targetProcess;
-                                    transitionSet.add(new Transition(new Action("tau", false),
+                                    transitionSet.add(new Transition(new Action("tau", false, leftTransition.action.getLabel()),
                                         this.graph.newCompositionProcess(targetSubprocesses)));
                                 }
                             });
