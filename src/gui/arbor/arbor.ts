@@ -14,7 +14,7 @@ module GUI {
         private highlightedEdges : Edge[] = [];
         private selectedNode : Node;
 
-        constructor(renderer, options = {repulsion: 400, stiffness: 800, friction: 0.5, dt: 5, integrator: "verlet"}) {
+        constructor(renderer, options = {repulsion: 400, stiffness: 800, friction: 0.5, dt: 3, integrator: "verlet"}) {
             this.sys = arbor.ParticleSystem(options);
             this.sys.parameters({gravity:true});
             this.renderer = renderer;
