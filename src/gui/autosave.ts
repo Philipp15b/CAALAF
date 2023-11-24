@@ -12,18 +12,7 @@ class AutoSave {
         this.storage = new WebStorage(localStorage);
 
         window.onbeforeunload = () => {
-            if (this.checkAutosave()) {
-                // Alert user.
-                return 'You have unsaved data!';
-            }
-            else {
-                // Reset alert.
-                window.onbeforeunload = undefined;
-            }
-        };
-
-        window.onunload = () => {
-            this.setAutosave(null);
+            this.autoSaveToStorage();
         };
     }
 
